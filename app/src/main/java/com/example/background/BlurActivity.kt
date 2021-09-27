@@ -19,6 +19,7 @@ package com.example.background
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,7 @@ class BlurActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.cancelButton.setOnClickListener { viewModel.cancelWork() }
         viewModel.outputWorkInfos.observe(this, workInfoObserver())
     }
 
@@ -101,6 +103,7 @@ class BlurActivity : AppCompatActivity() {
             val workInfo = listOfWorkInfo[0]
 
             if (workInfo.state.isFinished) {
+                Log.d("finishe", "yes")
                 showWorkFinished()
                 // Normally this processing, which is not directly related to drawing views on
                 // screen would be in the ViewModel. For simplicity we are keeping it here.
